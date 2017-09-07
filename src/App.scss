@@ -1,0 +1,23 @@
+
+@import 'containers/_Header';
+@import 'containers/_Footer';
+
+.Carousel-item {
+    height: 65vh;
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+
+body {
+    margin: 0 0 60px; // bottom has to be the same as footer height 
+}
