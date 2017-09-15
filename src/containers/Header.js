@@ -8,78 +8,58 @@ import imgSearch from "../images/lupa.png";
 import { Image, Nav, Navbar, NavItem, MenuItem, FormGroup, FormControl, Button } from 'react-bootstrap';
 import MyNavDropdown from '../components/MyNavDropdown';
 
-/*const styles = StyleSheet.create({
-    container : {
-        paddingTop      : 30,
-        justifyContent  : 'center',
-        alignItems      : 'center',
-        backgroundColor : '#F5FCFF',
-        flexDirection   : 'row',
-        flexWrap        : 'wrap'
-    },
-
-    touchable : {
-        width  : itemSize,
-        height : itemSize,
-        margin : 7
-    },
-
-    topBar : {
-        position        : 'absolute', 
-        top             : 0, 
-        height          : 25, 
-        width           : windowDims.width, 
-        backgroundColor : 'rgba(0,0,0,.8)'
-    }
-});*/
 
 function HeaderNavbarForm(props) {
+
   return (
-    <Navbar.Collapse className="HeaderNavbarForm">
-      <Navbar.Form  pullLeft>
-        <FormGroup  >
+    <form id="header-navnar-form-search">
+      <Navbar.Form pullLeft>
+        <FormGroup id="">
           <FormControl type="text" placeholder="Search" />
         </FormGroup>
         {' '}
-        <Button type="submit">Ok</Button>
+        <Button type="submit">OK</Button>
       </Navbar.Form>
-    </Navbar.Collapse>
+    </form> 
   );
 }
 
 
 export class HeaderNavBar extends React.Component {
-  handleOpen = () => {
-    console.log("==>Open");
-    this.setState({ 
-      isOpenEarthNavDropdown: true,
-      isOpenSearchDropdown: true 
-    });
-  }
-
-  handleClose = () => {
-    console.log("==>Close");
-    this.setState({
-      isOpenEarthNavDropdown: false,
-      isOpenSearchDropdown: false
-    });
-  }
 
   render(){
+    const styles = {
+      imgLang:{
+        width:'24px',
+        height:'24px',
+        padding: '2px'
+      },
+      earthDropDown: {
+          padding:'0px',
+          margin:'0px',
+          backgroundColor:'#EDEDED',
+          listStyle:'none',
+          display: 'inline'
+      },
+      li:{
+        display: 'inline'
+      }
+    };
     const earthMenu = (
       <span>
           <Image src={imgEart}/>
-          <Image src={imgPt} width="20px" height="20px" />
+          <Image src={imgPt} style={styles.imgLang} />
       </span>
     );
     const searchMenu = (
       <Image src={imgSearch} />
     );
+
     return (
       <Navbar  inverse collapseOnSelect className={this.props.className}>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="/">
+            <a href="/" >
               <Image src={imgLogo} alt="Logo" responsive />
             </a> 
           </Navbar.Brand>
@@ -94,21 +74,23 @@ export class HeaderNavBar extends React.Component {
               eventKey={4} 
               title={earthMenu} 
               noCaret 
-              className="SearchEarth" 
-              id="basic-nav-earth"
+              id="basic-navbar-earth"
             >
-              <MenuItem eventKey={4.1}>Português</MenuItem>
-              <MenuItem eventKey={4.2}>Inglês</MenuItem>
-              <MenuItem eventKey={4.3}>Espanhol</MenuItem>
-              <MenuItem divider />
-              <MenuItem eventKey={4.4}>Separated link</MenuItem>
+              <MenuItem eventKey={4.1} >
+                <nav id="basic-navbar-earth-dropdown-nav" style={styles.earthDropDown}>
+                  <ul style={styles.earthDropDown}>
+                    <li style={styles.earthDropDown}><a><img alt="" src={imgPt} style={styles.imgLang} />Português</a></li>
+                    <li style={styles.earthDropDown}><a><img alt="" src={imgEn} style={styles.imgLang} />English</a></li>
+                    <li style={styles.earthDropDown}><a><img alt="" src={imgEs} style={styles.imgLang} />Español</a></li>
+                  </ul>
+                </nav>
+              </MenuItem>
             </MyNavDropdown>
             <MyNavDropdown
               eventKey={5}
               title={searchMenu}
               noCaret
-              className="SearchEarth"
-              id="basic-nav-search"
+              id="basic-navbar-search"
             >
               <MenuItem eventKey={5.1}  >
                 <HeaderNavbarForm />
@@ -158,10 +140,10 @@ class Header extends Component {
 
   render() {
     return (
-      <nav>
+      <header>
         <HeaderNavBar className="HeaderNavBar" />
         <HeaderNav className="HeaderNav" />
-      </nav>
+      </header>
     )
   }
 }

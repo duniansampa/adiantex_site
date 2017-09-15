@@ -4,7 +4,7 @@ class Footer extends Component {
 
   render() {
     return (
-        <footer class="footer">
+        <footer>
           <div class="container">
             <p class="text-muted">Place sticky footer content here.</p>
           </div>

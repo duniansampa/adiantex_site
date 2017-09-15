@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 
+#Others
+*/Thumbs.db
+
 # testing
 /coverage
 

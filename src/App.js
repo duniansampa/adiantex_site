@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-//import logo from './LogoAdianteX.png';
-import './App.css';
 import { Navbar, Jumbotron, Button } from 'react-bootstrap';
+import './App.css';
 import Header from './containers/Header';
 import Footer from './containers/Footer';
 import Home from './pages/home/Home';
@@ -356,7 +355,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        {/*<Home />*/}
+        <Home />
         <Footer  />
       </div>
     );
