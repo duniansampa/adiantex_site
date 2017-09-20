@@ -1,151 +1,207 @@
 import React, { Component } from 'react';
 import imgLogo from '../images/LogoAdianteX.jpg';
 import imgPt from '../images/pt-br.png';
-import imgEn from '../images/en.png';
-import imgEs from '../images/es.png';
 import imgEart from "../images/earth.png";
 import imgSearch from "../images/lupa.png";
-import { Image, Nav, Navbar, NavItem, MenuItem, FormGroup, FormControl, Button } from 'react-bootstrap';
-import MyNavDropdown from '../components/MyNavDropdown';
+import styled from 'styled-components';
+import { Image, Nav, Navbar, NavItem, MenuItem} from 'react-bootstrap';
+import { MyNavDropdown} from '../components';
+import { LanguagePane, SearchForm } from '../containers'
 
-
-function HeaderNavbarForm(props) {
-
-  return (
-    <form id="header-navnar-form-search">
-      <Navbar.Form pullLeft>
-        <FormGroup id="">
-          <FormControl type="text" placeholder="Search" />
-        </FormGroup>
-        {' '}
-        <Button type="submit">OK</Button>
-      </Navbar.Form>
-    </form> 
-  );
-}
-
-
-export class HeaderNavBar extends React.Component {
+class HeaderNavBar extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {}
+  }
 
   render(){
-    const styles = {
-      imgLang:{
-        width:'24px',
-        height:'24px',
-        padding: '2px'
-      },
-      earthDropDown: {
-          padding:'0px',
-          margin:'0px',
-          backgroundColor:'#EDEDED',
-          listStyle:'none',
-          display: 'inline'
-      },
-      li:{
-        display: 'inline'
+
+    const IntNavbarHeader =  styled(Navbar.Header)`
+      &.navbar-header{
+        height: 80px;
+        width: 350px;
+        padding: 0;
+        margin: 0;
+        > a.navbar-brand{
+          height: inherit;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
       }
-    };
+    `
+    const IntNavBar = styled(Navbar)`
+      &.navbar{
+        background: #3b5998; 
+        margin: 0;
+        border-width: 0;
+        border-radius: 0;
+        > div.container{
+          width: 1200px;
+          padding: 0;
+        }
+      }
+    `;
+
+    const IntMenuItem = styled(MenuItem)`
+      &[role=presentation], &[role=presentation] > a[role=menuitem]{
+            width: ${ (props) => props.width || 'auto'};
+            margin: 0;
+            padding: 0;
+            border-bottom: 0;
+            background-image: none;
+            background-color: transparent ;
+      }
+    `;
+
+    const IntImage = styled(Image)`
+      width: 24px;
+      height: 24px;
+      padding: 2px;
+    `;
+
+    const IntNavItem = styled(NavItem)`
+      &[role=presentation]{
+        height: ${ (props) => props.height || '80px'};
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        > a[role=button] {
+          text-align: center;
+          &:link, &:visited { color: white; }
+          &:hover, &:active { color: black; } 
+          text-decoration: underline ;
+          font-family: monospace;
+        }
+      }
+    `;
+
     const earthMenu = (
       <span>
           <Image src={imgEart}/>
-          <Image src={imgPt} style={styles.imgLang} />
+          <IntImage src={imgPt}/>
       </span>
-    );
-    const searchMenu = (
-      <Image src={imgSearch} />
     );
 
     return (
-      <Navbar  inverse collapseOnSelect className={this.props.className}>
-        <Navbar.Header>
+      <IntNavBar  inverse collapseOnSelect className={this.props.className}>
+        <IntNavbarHeader>
           <Navbar.Brand>
-            <a href="/" >
+            <a href="#">
               <Image src={imgLogo} alt="Logo" responsive />
-            </a> 
+            </a>
           </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header> 
+        </IntNavbarHeader> 
         <Navbar.Collapse>
           <Nav bsStyle="pills" pullRight >
-            <NavItem eventKey={1} href="#">Inicio</NavItem>
-            <NavItem eventKey={2} href="#">Trabalhe Conosco</NavItem>
-            <NavItem eventKey={3} href="#">Contato</NavItem>
-            <MyNavDropdown 
-              eventKey={4} 
-              title={earthMenu} 
-              noCaret 
-              id="basic-navbar-earth"
-            >
-              <MenuItem eventKey={4.1} >
-                <nav id="basic-navbar-earth-dropdown-nav" style={styles.earthDropDown}>
-                  <ul style={styles.earthDropDown}>
-                    <li style={styles.earthDropDown}><a><img alt="" src={imgPt} style={styles.imgLang} />Português</a></li>
-                    <li style={styles.earthDropDown}><a><img alt="" src={imgEn} style={styles.imgLang} />English</a></li>
-                    <li style={styles.earthDropDown}><a><img alt="" src={imgEs} style={styles.imgLang} />Español</a></li>
-                  </ul>
-                </nav>
-              </MenuItem>
+            <IntNavItem eventKey={1} href="#">Inicio</IntNavItem>
+            <IntNavItem eventKey={2} href="#">Trabalhe Conosco</IntNavItem>
+            <IntNavItem eventKey={3} href="#">Contato</IntNavItem>
+            <MyNavDropdown  eventKey={4} title={ earthMenu } noCaret id="nav-dropdown-earth" >
+              <IntMenuItem eventKey={4.1} >
+                <LanguagePane />
+              </IntMenuItem>
             </MyNavDropdown>
-            <MyNavDropdown
-              eventKey={5}
-              title={searchMenu}
-              noCaret
-              id="basic-navbar-search"
-            >
-              <MenuItem eventKey={5.1}  >
-                <HeaderNavbarForm />
-              </MenuItem>
+            <MyNavDropdown eventKey={5} title={<Image src={imgSearch}/>} noCaret  id="nav-dropdown-search">
+              <IntMenuItem eventKey={5.1}  >
+                <SearchForm />
+              </IntMenuItem>
             </MyNavDropdown>
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </IntNavBar>
     );
   }
 }
 
-function HeaderNav(props) {
-  return (
-    <Nav bsStyle="tabs" className={props.className}>
-      <MyNavDropdown noCaret eventKey={3} title="A ADIANTEX" id="basic-nav-dropdown">
-        <NavItem eventKey={1} href="#">Sobre a AdianteX</NavItem>
-        <NavItem eventKey={1} href="#">História</NavItem>
-        <NavItem eventKey={1} href="#">AdianteX no Mundo</NavItem>
-      </MyNavDropdown>
-      <MyNavDropdown noCaret eventKey={3} title="VISÃO DO FUTURO" id="basic-nav-dropdown">
-        <NavItem eventKey={2} href="#">Pessoas de Conhecimento</NavItem>
-        <NavItem eventKey={2} href="#">Tecnologia e Inovação</NavItem>
-        <NavItem eventKey={2} href="#">Produtividade</NavItem>
-      </MyNavDropdown>
-      <MyNavDropdown noCaret eventKey={3} title="SERVIÇOS" id="basic-nav-dropdown">
-        <MenuItem eventKey={3.1}>Action</MenuItem>
-        <MenuItem eventKey={3.2}>Another action</MenuItem>
-        <MenuItem eventKey={3.3}>Something else here</MenuItem>
-        <MenuItem divider />
-        <MenuItem eventKey={3.3}>Separated link</MenuItem>
-      </MyNavDropdown>
-      <MyNavDropdown noCaret eventKey={3} title="PRODUTOS" id="basic-nav-dropdown">
-        <NavItem eventKey={1} href="#">Link Right</NavItem>
-      </MyNavDropdown>
-      <MyNavDropdown noCaret eventKey={3} title="GOVERNANÇA" id="basic-nav-dropdown">
-        <NavItem eventKey={2} href="#">Link Right</NavItem>
-      </MyNavDropdown>
-      <MyNavDropdown noCaret eventKey={3} title="COMUNICAÇÃO" id="basic-nav-dropdown">
-        <NavItem eventKey={2} href="#">Link Right</NavItem>
-      </MyNavDropdown>
-    </Nav>
-  );
+class HeaderNav extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {}
+  }
+
+  render(){
+    const IntNav = styled(Nav)`
+        &.nav {
+          background: #8b9dc3;
+          display: flex;
+          justify-content: center;
+          border: 0;
+        }
+    `;
+    
+    const myWidth = '228px';
+    const myHeight = '60px';
+
+    const IntMenuItem = styled(MenuItem)`
+      &[role=presentation]{
+        height: 43px;
+        width: ${myWidth};
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        > a[role=menuitem]{
+            color: white;
+            height: 43px;
+            line-height: 43px;
+            width: ${myWidth};
+            padding-left: 10px;
+            background-image: none;
+            background-color: transparent ;
+            border-bottom-color: rgba(0,0,0,.07);
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            &:hover {
+              background-color: #D6D6D6;
+              color: black;
+            }
+        }
+      }
+    `;
+
+    return (
+      <IntNav bsStyle="tabs" >
+        <MyNavDropdown itemDivider noCaret eventKey={1} height={myHeight}  width={myWidth}  title="A ADIANTEX" id="nav-dropdown-aadiantex">
+          <IntMenuItem eventKey={2.1} href="#">Sobre a AdianteX</IntMenuItem>
+          <IntMenuItem eventKey={2.1} href="#">História</IntMenuItem>
+        </MyNavDropdown>
+        <MyNavDropdown itemDivider eventKey={2} height={myHeight}  width={myWidth}  title="VISÃO DE FUTURO" id="nav-dropdown-vfuturo">
+          <IntMenuItem eventKey={2.1} href="#">Pessoas de Conhecimento</IntMenuItem>
+          <IntMenuItem eventKey={2.2} href="#">Tecnologia e Inovação</IntMenuItem>
+          <IntMenuItem eventKey={2.3} href="#">Produtividade</IntMenuItem>
+        </MyNavDropdown>
+        <MyNavDropdown itemDivider eventKey={3} height={myHeight}  width={myWidth}  title="SOLUÇÕES" id="nav-dropdown-solucao">
+          <IntMenuItem eventKey={3.1}>Internet das Coisas</IntMenuItem>
+          <IntMenuItem eventKey={3.2}>Telemetria </IntMenuItem>
+          <IntMenuItem eventKey={3.3}>Rastreamento de Carga</IntMenuItem>
+          <IntMenuItem eventKey={3.4}>Automação Residencial</IntMenuItem>
+          <IntMenuItem eventKey={3.4}>Nossos Serviços</IntMenuItem>
+        </MyNavDropdown>
+        <MyNavDropdown itemDivider eventKey={4} height={myHeight}  width={myWidth}  title="GOVERNANÇA" id="nav-dropdown-governanca">
+          <IntMenuItem eventKey={4.1} href="#">Conformidade</IntMenuItem>
+          <IntMenuItem eventKey={4.1} href="#">Conselho e Diretoria</IntMenuItem>
+        </MyNavDropdown>
+        <MyNavDropdown eventKey={5} height={myHeight}  width={myWidth}  title="COMUNICAÇÃO" id="nav-dropdown-comunicacao">
+          <IntMenuItem eventKey={5.1} href="#">Notícias</IntMenuItem>
+          <IntMenuItem eventKey={5.1} href="#">Redes Sociais</IntMenuItem>
+        </MyNavDropdown>
+      </IntNav>
+    );
+  }
 }
 
-class Header extends Component {
+export default class Header extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {}
+  }
 
   render() {
     return (
-      <header>
+      <header className="fixed-top" >
         <HeaderNavBar className="HeaderNavBar" />
         <HeaderNav className="HeaderNav" />
       </header>
     )
   }
 }
-
-export default Header
