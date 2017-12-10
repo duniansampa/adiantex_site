@@ -1,36 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Jumbotron, Grid, Row, Col } from "react-bootstrap";
+import { Grid, Row, Col } from "react-bootstrap";
 import imgSobreAdiantex from "../../images/sobre_a_adiantex.jpg";
 import PropTypes from "prop-types";
-
-const ImageBox = styled.div`
-  margin: 5px 0 30px;
-  height: 108px;
-  background-image: ${"url(" + imgSobreAdiantex + ")"};
-  background-size: cover;
-  border-bottom: 3px solid #a7a7a7;
-  border-top: 3px solid #a7a7a7;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-const ImageTitle = styled.h2`
-  color: #fff;
-  font-family: Calibri, Arial, sans-serif;
-  font-weight: 400;
-  font-size: 2.8em;
-  margin: auto;
-  display: inline-block;
-  text-transform: uppercase;
-`;
-
-const ImageHeader = () => (
-  <ImageBox>
-    <ImageTitle>Sobre</ImageTitle>
-  </ImageBox>
-);
+import { ImageHeader, Container } from "../../components";
+import { ImageTitle } from "../../components/ImageHeader";
 
 const MediaBox = styled.div`color: white;`;
 
@@ -180,14 +154,6 @@ const Sobre = () => (
   </p>
 );
 
-const Container = styled.div`
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: 90px;
-  margin-left: 90px;
-  font-size: 21px;
-`;
-
 const AboutBox = styled.div`
   background-color: #8b9dc3;
   margin-bottom: 30px;
@@ -195,8 +161,7 @@ const AboutBox = styled.div`
 const AboutAdiantex = () => {
   return (
     <div>
-      <ImageHeader />
-      <br />
+      <ImageHeader img={imgSobreAdiantex} title="SOBRE" />
       <Container>
         <Sobre />
       </Container>
