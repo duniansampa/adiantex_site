@@ -22,7 +22,7 @@ const KnowledgeablePeople = ({ match }) => {
           {`A AdianteX entende que o conhecimento humano é um recurso ilimitado, que possui um papel de relevância nos seus negócios.`}
         </p>
         <p>
-          {`Como o conhecimento é a ferramenta muito importante para a evolução da empresa, além de investir fortemente em treinamentos e qualificação profissional, a AdianteX incentiva os seus colaboradores a potencializarem os seus conhecimentos através de desenvolvimento das habilidades, competências e criatividade.`}
+          {`Como o conhecimento é a ferramenta muito importante para a evolução da empresa, além de investir fortemente em treinamentos e qualificação profissional, a AdianteX incentiva os seus colaboradores a potencializarem os seus conhecimentos através de desenvolvimento das habilidades, competências e criatividades.`}
         </p>
         <p>
           {`Os colaboradores têm de estar sempre em busca de novas tecnologias, já que são fatores que proporcionem vantagens competitivas para a AdianteX.`}
